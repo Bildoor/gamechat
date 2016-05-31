@@ -1,0 +1,131 @@
+.navbar li:hover,
+.navbar a:hover,
+.open,
+.open:active,
+.open:focus,
+.open > a,
+.open > a:active,
+.open > a:focus
+{
+	background: transparent !important;
+}
+
+.navbar
+{
+    border-radius: 0;
+    min-height: 80px;
+	z-index: 100;
+
+    .navbar.navbar-default.container-fluid
+    {
+        border-radius: 0px;
+        margin-top: 15px;
+        padding: 0 33px !important;
+        height: 55px;
+    }
+
+    .navbar-brand
+    {
+        margin-top: 15px;
+        -webkit-transition: color 0.15s ease-in-out;
+        transition: color 0.1s ease-in-out;
+    }
+}
+
+@media (min-width: $grid-float-breakpoint)
+{
+    .navbar-collapse.collapse
+    {
+        display: block;
+    }
+
+    #menu-top-navigation
+    {
+        float: right;
+        margin: 0;
+    }
+}
+
+
+// Menu in collapsed state (mobile-menu)
+@media (max-width: $grid-float-breakpoint)
+{
+    nav.navbar.navbar-default.container-fluid
+    {
+        padding: 0 !important;
+    }
+
+    .navbar,
+    .navbar-default
+    {
+        min-height: 58px;
+
+        &.container 
+        {
+            padding: 0;
+        }
+
+        .nav .navbar-nav
+        {
+            float: none;
+
+            li,
+            .active
+            {
+	            display: block;
+                float: none;
+
+			    a
+			    {
+				    text-align: left;
+	                margin: 0;
+	                padding: 15px 25px 15px 25px;
+	                border-radius: 0 !important;
+			    }
+            }
+        }
+
+        .navbar-header
+        {
+            float: none;
+            height: 58px;
+            padding: 0 0 0 16px;
+
+            button
+            {
+                margin-top: 18px;
+            }
+
+            .navbar-toggle
+            {
+                border: 0;
+                padding: 0;
+                display: block;
+
+			    .fa
+			    {
+				    font-size: 22px;
+			    }
+            }
+
+            .navbar-brand
+            {
+                margin: 4px 0;
+                text-shadow: 0 0 0 transparent;
+            }
+        }
+
+        .navbar-collapse,
+        .navbar-collapse .collapse
+        {
+            border-top: 0;
+            padding: 0;
+            overflow-x: hidden;
+
+            .in
+            {
+                display: block;
+            }
+        }
+    }
+}
