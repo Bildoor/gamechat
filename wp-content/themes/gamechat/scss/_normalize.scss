@@ -1,4 +1,5 @@
-* {
+* 
+{
 	margin: 0;
 	padding: 0;
     -webkit-box-sizing: border-box;
@@ -26,11 +27,9 @@ html
 
 body 
 {
-	margin: 0;
     min-height: 100vh;
 	position: relative;
     overflow-x: hidden;
-    background: $background-color;
 }
 
 p, 
@@ -40,8 +39,8 @@ input,
 strong, 
 em
 {
-		font-size: 16px;
-		font-weight: 300;
+	font-size: 16px;
+	font-weight: 300;
 }
 
 article,
@@ -280,4 +279,14 @@ td,
 th 
 {
 	padding: 0;
+}
+
+.fa
+{
+    color: $icon-color;
+}
+
+#content
+{
+    min-height: 100vh;
 }

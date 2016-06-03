@@ -150,3 +150,18 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+// custom scripts bby
+function custom_script_loader()
+{
+	// Remove shitty ass jquery, replace with local
+	wp_deregister_script('jquery');
+
+	// load Vendor scripts
+	wp_enqueue_script('vendorjs', get_template_directory_uri() . '/project.vendor.min.js');
+
+	// Load core.js
+	wp_enqueue_script('corejs', get_template_directory_uri() . '/project.core.min.js', array(), null, true);
+}
+add_action('wp_enqueue_scripts','custom_script_loader');
+

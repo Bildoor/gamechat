@@ -1,0 +1,32 @@
+﻿
+footer
+{
+    height: 300px;
+    background: #EEE;
+
+    .social-buttons-wrapper
+    {
+        height: 100%;
+        margin-top: 5px;
+    }
+
+    .social-button-holder
+    {
+        text-align: center;
+        font-size: 4.6em;
+
+        &:hover
+        {
+            color:red !important;
+        }
+    }
+    #secondary-menu
+    {
+        list-style-type: none;
+
+        & .menuitem
+        {
+            border: 1px solid red !important;
+        }
+    }
+}

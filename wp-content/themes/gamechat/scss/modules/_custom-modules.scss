@@ -1,106 +1,113 @@
-.logincontainer
+.question-post
 {
-    background: $background-color-light;
-    margin-top: 100px;
+    border-bottom: 1px solid $accent-color;
+    padding-bottom: 10px;
+    position: relative;
 
-    .profile-picture-wrapper
+    h2, 
+    .date
     {
-        margin-top: 35px;
-        margin-bottom: 25px;
-        position: relative;
+        margin-top: 10px;
+    }
+
+    .tags
+    {
+        padding: 5px 12px;
+        background-color: $accent-color;
+        color: $text-color-lighter;
+        border-radius: 2px;
+        display: inline-block;
+        margin-right: 12px;
+        margin-top: 8px;
+        cursor: pointer;
+
+        &:last-of-type
+        {
+            margin-right: 0;
+        }
+
+        &:hover,
+        &:active,
+        &:focus
+        {
+            background-color: $hightlight-accent-color;
+        }
+    }
+
+    .upvotes,
+    .comments
+    {
+        text-align: right;
         padding: 0;
+
+        .fa
+        {
+           width: 20px;
+           margin-left: 5px;
+           font-size: 18px;
+        }
+    }
+
+    & + .question-post
+    {
+        margin-top: 15px;
+    }
+
+    &:nth-of-type(1)
+    {
+        margin-top: 25px;
+    }
+
+    .col-xs-3:nth-child(4)
+    {
+        position: absolute;
+        bottom: 10px;
+        right: 15px;
+    }
+}
+
+.active-user-list
+{
+
+    list-style-type: none;
+
+    li
+    {
+        margin-bottom: 10px;
+        counter-increment: step-counter;
+
 
         .profile-picture
         {
-            position: absolute;
-            border-radius: 50%;
+            background-image: url("http://www.planwallpaper.com/static/images/327912-blue-yellow-abstract-wallpapers.jpg");
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
-            @include transition(background-image 0.5s linear);
-
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-        }
-
-        &:after
-        {
-            content: "";
-            display: block;
-            padding-top: 100%;
-        }
-    }
-
-    form
-    {
-        input[type=text],
-        input[type=email],
-        input[type=password]
-        {
-            padding: 10px 0 10px 20px;
-            font-family: FontAwesome;
-
-            + input,
-            + button
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            @include boxshadow(0 0 2px 1px $accent-color, inset);
+        
+            &::before
             {
-                margin-top: 20px;
+                content: counter(step-counter);
+                position: absolute;
+                left: 13px;
+                top: 6px;
+                color: $text-color-lighter;
+                text-shadow: 0 0 1px #000;
+                font-size: 18px;
+
             }
         }
-
-        .forgot
+        .profile-username
         {
-            margin-top: 25px;
-            margin-bottom: 25px;
-            text-align: right;
-            padding: 0;
-
-            a 
-            {
-                color: $background-color-btn;
-                text-decoration: none;
-
-                &:hover,
-                &:active
-                {
-                    text-decoration: underline;
-                }
-            }
+            margin-left: 5px;
+            vertical-align: middle;
         }
-    }
-}
 
-.button
-{
-    padding: 10px 0;
-    outline: 0;
-}
-
-.button-submit
-{
-    color: $text-color;
-    background-color: $background-color-btn;
-    border-color: $background-color-btn;
-    border-style: solid;
-    @include transition(box-shadow 0.10s ease-in-out);
-    
-    &:first-letter
-    {
-        text-transform: uppercase;
-    }
-
-    &:hover,
-    &:active
-    {
-        -webkit-box-shadow: inset 0 0 20px 4px $background-color-btn-hover;
-        -moz-box-shadow: inset 0 0 20px 4px $background-color-btn-hover;
-        box-shadow: inset 0 0 20px 4px $background-color-btn-hover;
-    }
-
-    .fa
-    {
-        color: $text-color;
-        margin: 0 10px;
     }
 }
