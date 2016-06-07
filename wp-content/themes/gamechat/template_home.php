@@ -13,108 +13,59 @@
     <section class="entry-content container">
         <div class="row">
             <div class="col-md-7 col-sm-7 col-xs-12">
-                <article class="col-xs-12 question-post">
-                    <h2 class="col-xs-8">
-                        En fin rubik's
-                    </h2>
-                    <div class="col-xs-3 col-xs-offset-1 date text-right">2014-03-61</div>
+                <?php
+                $posts = get_posts(array(
+                    'post_type' => 'post',
+                    'posts_per_page' => 5,
+                    'post_status' => 'publish',
+                    'orderby' => 'post_date',
+                    'oder' => 'DESC'
+                ));
 
-                    <div class="col-xs-8">
-                        <span class="tags"># SQL</span>
-                        <span class="tags"># JS</span>
-                        <span class="tags"># HTML</span>
-                    </div>
-                    <div class="col-xs-3 col-xs-offset-1">
-                        <div class="col-xs-12 upvotes">
-                            <span>13</span>
-                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                        </div>
+                if ( $posts ) :
+                    foreach ( $posts as $post ) :
+                        the_post;
+                        $tags = wp_get_post_tags( $post->ID );?>
 
-                        <div class="col-xs-12 comments">       
-                            <span>2</span>
-                            <i class="fa fa-comments" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </article>
+                        <article class="col-xs-12 question-post">
+                            <h2 class="col-xs-8">
+                                <a href="<?=get_the_permalink(); ?>">
+                                    <?= get_the_title();?>
+                                </a>
+                            </h2>
 
-                <article class="col-xs-12 question-post">
-                    <h2 class="col-xs-8">
-                        En fin rubik's
-                    </h2>
-                    <div class="col-xs-3 col-xs-offset-1 date text-right">2014-03-61</div>
+                            <div class="col-xs-3 col-xs-offset-1 date text-right"><?= the_date(); ?></div>
 
-                    <div class="col-xs-8">
-                        <span class="tags"># SQL</span>
-                        <span class="tags"># JS</span>
-                        <span class="tags"># HTML</span>
-                    </div>
-                    <div class="col-xs-3 col-xs-offset-1">
-                        <div class="col-xs-12 upvotes">
-                            <span>13</span>
-                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                        </div>
+                            <div class="col-xs-8">
+                                <?php
+                                foreach ($tags as $tag) : ?>
+                                
+                                    <span class="tags"># <?=$tag->name; ?></span>
 
-                        <div class="col-xs-12 comments">
-                            <span>2</span>
-                            <i class="fa fa-comments" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </article>
+                                <?php
+                                endforeach;
+                                ?>
+                            </div>
 
-                <article class="col-xs-12 question-post">
-                    <h2 class="col-xs-8">
-                        En fin rubik's
-                    </h2>
-                    <div class="col-xs-3 col-xs-offset-1 date text-right">2014-03-61</div>
+                            <div class="col-xs-3 col-xs-offset-1">
+                                <div class="col-xs-12 upvotes">
+                                    <span></span>
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                </div>
 
-                    <div class="col-xs-8">
-                        <span class="tags"># SQL</span>
-                        <span class="tags"># JS</span>
-                        <span class="tags"># HTML</span>
-                        <span class="tags"># SQL</span>
-                        <span class="tags"># JS</span>
-                        <span class="tags"># SuperMegaAWeafeyw6urtyjftyjhhj</span>
-                        <span class="tags"># ShrekIsLove</span>
-                        <span class="tags"># ShrekIsLife</span>
-                    </div>
-                    <div class="col-xs-3 col-xs-offset-1">
-                        <div class="col-xs-12 upvotes">
-                            <span>13</span>
-                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                        </div>
-
-                        <div class="col-xs-12 comments">
-                            <span>2</span>
-                            <i class="fa fa-comments" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="col-xs-12 question-post">
-                    <h2 class="col-xs-8">
-                        En fin rubik's
-                    </h2>
-                    <div class="col-xs-3 col-xs-offset-1 date text-right">2014-03-61</div>
-
-                    <div class="col-xs-8">
-                        <span class="tags"># SQL</span>
-                        <span class="tags"># JS</span>
-                        <span class="tags"># HTML</span>
-                    </div>
-                    <div class="col-xs-3 col-xs-offset-1">
-                        <div class="col-xs-12 upvotes">
-                            <span>13</span>
-                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                        </div>
-
-                        <div class="col-xs-12 comments">
-                            <span>2</span>
-                            <i class="fa fa-comments" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </article>
+                                <div class="col-xs-12 comments">
+                                    <span></span>
+                                    <i class="fa fa-comments" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </article>
+                    
+                    <?php
+                    endforeach;
+                endif;
+                    ?>
             </div>
-            
+
             <div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12">
                 <aside class="col-xs-12">
                     <h2 class="col-xs-12">Most active users</h2>
@@ -142,6 +93,22 @@
                         </li>
                     </ol>
                 </aside>
+
+                <aside class="col-xs-12">
+                    <h2 class="col-xs-12">Most popular tags</h2>
+                    <ol>
+                        <li>
+                            <span class="tags"> # BrainFuck </span>
+                        </li>
+                        <li>
+                            <span class="tags"> # PHP </span>
+                        </li>
+                        <li>
+                            <span class="tags"> # SQL </span>
+                        </li>
+                    </ol>
+                </aside>
+
             </div>
         </div>
     </section><!-- .entry-content -->

@@ -6335,19 +6335,38 @@ address {
       vertical-align: middle; }
 
 footer {
-  height: 300px;
+  min-height: 300px;
   background: #EEE; }
   footer .social-buttons-wrapper {
     height: 100%;
     margin-top: 5px; }
   footer .social-button-holder {
     text-align: center;
-    font-size: 4.6em; }
-    footer .social-button-holder:hover {
-      color: red !important; }
+    font-size: 4em; }
+    footer .social-button-holder .fa {
+      transition: color 0.15s ease-in-out;
+      -moz-transition: color 0.15s ease-in-out;
+      -o-transition: color 0.15s ease-in-out;
+      -webkit-transition: color 0.15s ease-in-out; }
+      footer .social-button-holder .fa:hover, footer .social-button-holder .fa:focus, footer .social-button-holder .fa:active {
+        color: #2F74BD; }
   footer #secondary-menu {
     list-style-type: none; }
-    footer #secondary-menu .menuitem {
-      border: 1px solid red !important; }
+    footer #secondary-menu .menu-item a {
+      font-size: 18px;
+      margin-bottom: 4px;
+      color: #222222;
+      display: block;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.1s ease-in-out;
+      -moz-transition: border-color 0.1s ease-in-out;
+      -o-transition: border-color 0.1s ease-in-out;
+      -webkit-transition: border-color 0.1s ease-in-out; }
+      footer #secondary-menu .menu-item a:hover, footer #secondary-menu .menu-item a:active, footer #secondary-menu .menu-item a:focus {
+        color: #446C97;
+        border-color: #555555; }
+  footer h3 {
+    border-bottom: 1px solid #222222;
+    padding-bottom: 8px; }
 
 /*# sourceMappingURL=style.css.map */
