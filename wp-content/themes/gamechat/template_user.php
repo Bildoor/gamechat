@@ -32,7 +32,8 @@
 
     <section class="entry-content container">
         <div class="row">
-            
+            <h1 class="col-xs-12">Account</h1>
+
             <?php
                 if( !isset( $_GET["userid"]) || intval($_GET["userid"]) === $current_user->ID )
                 {
@@ -73,6 +74,7 @@ EOD;
 
                 ));
 
+                $postContent = "";
                 foreach($posts as $post)
                 {
                     $postContent =  <<<EOD
@@ -108,7 +110,7 @@ EOD;
                         </article>
 EOD;
                 }
-                echo $postContent;
+                echo ($postContent === "") ? "<p class='col-xs-12'>No post written</p>" : $postContent;
 
             ?>
             <h2 class="col-xs-12">Most recent comments</h2>
@@ -120,6 +122,7 @@ EOD;
                     'author__in' => [(isset($_GET['userid'])) ? $_GET['userid'] : $current_user->ID]
                 ));
 
+
                 $html = "";
                 foreach($comments as $comment)
                 {
@@ -127,7 +130,8 @@ EOD;
                     $html .= "<div>{$comment->comment_content}</div>";
                     $html .= "<div>{$comment->comment_date}</div>";
                 }
-                echo $html;
+
+                echo ($html === "") ? "<p class='col-xs-12'>No comments written</p>" : $html;
             ?>
         </div>
     </section><!-- .entry-content -->

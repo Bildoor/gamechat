@@ -16,7 +16,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <?php wp_head(); ?>
 </head>
 
@@ -36,7 +35,7 @@
                             <span class="icon-bar"></span>
                         </button>
 
-                        <a class="navbar-brand" href="#">Brand</a>
+                        <a class="navbar-brand" href="index.php">GameChat</a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,7 +50,7 @@
                         )); 
                         ?> 
 
-                        <form class="navbar-form navbar-left" role="search">
+                        <!--<form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Need help mate?">
                             </div>
@@ -60,7 +59,7 @@
                                 <i class="fa fa-search" aria-hidden="true"></i>
                                 <span>Search</span>
                             </button>
-                        </form>
+                        </form>-->
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>

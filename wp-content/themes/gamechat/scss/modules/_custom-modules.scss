@@ -10,29 +10,7 @@
         margin-top: 10px;
     }
 
-    .tags
-    {
-        padding: 5px 12px;
-        background-color: $accent-color;
-        color: $text-color-lighter;
-        border-radius: 2px;
-        display: inline-block;
-        margin-right: 12px;
-        margin-top: 8px;
-        cursor: pointer;
-
-        &:last-of-type
-        {
-            margin-right: 0;
-        }
-
-        &:hover,
-        &:active,
-        &:focus
-        {
-            background-color: $hightlight-accent-color;
-        }
-    }
+    
 
     .upvotes,
     .comments
@@ -63,6 +41,30 @@
         position: absolute;
         bottom: 10px;
         right: 15px;
+    }
+}
+
+.tags
+{
+    padding: 5px 12px;
+    background-color: $accent-color;
+    color: $text-color-lighter;
+    border-radius: 2px;
+    display: inline-block;
+    margin-right: 12px;
+    margin-top: 8px;
+    cursor: pointer;
+
+    & > a:last-of-type
+    {
+        margin-right: 0;
+    }
+
+    &:hover,
+    &:active,
+    &:focus
+    {
+        background-color: $hightlight-accent-color;
     }
 }
 

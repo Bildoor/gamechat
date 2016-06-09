@@ -165,3 +165,231 @@ function custom_script_loader()
 }
 add_action('wp_enqueue_scripts','custom_script_loader');
 
+function getTop5Users()
+{
+    global $wpdb;
+    $query = "SELECT * FROM wp_users ORDER BY activitycount DESC LIMIT 5";
+    $users = $wpdb->get_results($query, OBJECT);
+
+    $html = "";
+    foreach($users as $user)
+        $html .= "
+                            <li class='col-md-12 col-sm-12 col-xs-6'>
+                                <a href='/gamechat/?page_id=37&userid={$user->ID}'>
+                                    <div class='profile-picture' style='background-image: URL(". get_avatar_url($user->ID) .");'></div>
+                                    <span class='profile-username'>{$user->display_name}</span>
+                                </a>
+                            </li>";
+    return $html;
+}
+
+function getTop5Tags()
+{
+    global $wpdb;
+    $query = "SELECT * FROM wp_term_relationships
+                    JOIN wp_term_taxonomy
+                    ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
+                    JOIN wp_terms
+                    ON wp_terms.term_id = wp_term_taxonomy.term_id
+                    WHERE name != 'Top menu' AND  name != 'Okategoriserade'
+                    GROUP BY name
+                    ORDER BY count(*) DESC LIMIT 5"
+                ;
+
+
+    $tags = $wpdb->get_results($query, OBJECT);
+
+    $html = "";
+    foreach($tags as $tag)
+        $html .= "<li>
+                        <a href='/gamechat/?pageId=35&tagId={$tag->term_id}'><span class='tags'># {$tag->name}</span></a>
+                      </li>";
+
+    return $html;
+}
+function get5LatestPosts($site = "")
+{
+    $posts = get_posts(array(
+                'post_type' => 'post',
+                'posts_per_page' => 5,
+                'post_status' => 'publish',
+                'orderby' => 'post_date',
+                'oder' => 'DESC'
+            ));
+
+
+    $html = "";
+
+    if($posts)
+    {
+        foreach($posts as $post)
+        {
+            $html .= <<<EOD
+                                <article class="col-xs-12 question-post">
+                            <h2 class="col-xs-8">
+                                <a href="/gamechat/?page_id=33&postId={$post->ID}">
+                                    {$post->post_title}
+                                </a>
+                            </h2>
+
+                            <div class="col-xs-3 col-xs-offset-1 date text-right">
+EOD;
+                $html .= date("Y-m-d", strtotime($post->post_date));
+                $html .= <<<EOD
+                            </div>
+
+EOD;
+                if($site === "posts")
+                {
+                    $html .= "<div class='col-xs-12'>{$post->post_content}</div>";
+                }
+
+
+                $html .= <<<EOD
+                            <div class="col-xs-8">
+EOD;
+
+            $tags = wp_get_post_tags( $post->ID );
+            foreach ($tags as $tag)
+                $html .= '<a href="/gamechat/index.php?page_id=35&tagId='. $tag->term_id .'"><span class="tags"># '. $tag->name .'</span></a>';
+
+            $html .= <<<EOD
+                            </div>
+
+                            <div class="col-xs-3 col-xs-offset-1">
+                                <div class="col-xs-12 upvotes">
+                                    <span>{$post->likes}</span>
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                </div>
+
+                                <div class="col-xs-12 comments">
+                                    <span>{$post->comment_count}</span>
+                                    <i class="fa fa-comments" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </article>
+EOD;
+        }
+    }
+
+    return $html;
+}
+
+function getPostsFromTagId($id)
+{
+    global $wp_query;
+    $args = array(
+            'tag__in' => $id,
+            'posts_per_page' => -1
+        );
+
+    $posts = get_posts($args);
+
+    $html = "";
+
+    if($posts)
+    {
+        foreach($posts as $post)
+        {
+            $html .= <<<EOD
+                                <article class="col-xs-12 question-post">
+                            <h2 class="col-xs-8">
+                                <a href="/gamechat/?page_id=33&postId={$post->ID}">
+                                    {$post->post_title}
+                                </a>
+                            </h2>
+
+                            <div class="col-xs-3 col-xs-offset-1 date text-right">
+EOD;
+            $html .= date("Y-m-d", strtotime($post->post_date));
+            $html .= <<<EOD
+                            </div>
+                            <div class="col-xs-8">
+EOD;
+
+            $tags = wp_get_post_tags( $post->ID );
+            foreach ($tags as $tag)
+                $html .= '<a href="/gamechat/index.php?page_id=35&tagId='. $tag->term_id .'"><span class="tags"># '. $tag->name .'</span></a>';
+
+            $html .= <<<EOD
+                            </div>
+
+                            <div class="col-xs-3 col-xs-offset-1">
+                                <div class="col-xs-12 upvotes">
+                                    <span>{$post->likes}</span>
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                </div>
+
+                                <div class="col-xs-12 comments">
+                                    <span>{$post->comment_count}</span>
+                                    <i class="fa fa-comments" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </article>
+EOD;
+        }
+    }
+
+    return $html;
+
+}
+
+function printAllTags()
+{
+
+    global $wpdb;
+    $query = "SELECT * FROM wp_term_relationships
+                    JOIN wp_term_taxonomy
+                    ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
+                    JOIN wp_terms
+                    ON wp_terms.term_id = wp_term_taxonomy.term_id
+                    WHERE name != 'Top menu' AND  name != 'Okategoriserade'
+                    GROUP BY name
+                    ORDER BY count(*) DESC LIMIT 5"
+                ;
+
+
+    $tags = $wpdb->get_results($query, OBJECT);
+
+    $html = "";
+
+    foreach($tags as $tag)
+        $html .= '<a href="/gamechat/index.php?page_id=35&tagId='. $tag->term_id .'"><span class="tags"># '. $tag->name .'</span></a>';
+
+    return $html;
+}
+
+function getSpecificPost($id = null)
+{
+    $post = get_post($id);
+
+    $html = "
+        <article class='col-xs-12'>
+            <h2 class='col-xs-9'>{$post->post_title}</h2><span class='col-xs-2 col-xs-offset-1'>". date("Y-m-d", strtotime($post->post_date)) ."</span>
+            <div class='col-xs-12'>{$post->post_content}</div>
+
+            <div class='col-xs-8'>
+            ";
+            $tags = wp_get_post_tags( $post->ID );
+            foreach ($tags as $tag)
+                $html .= '<a href="/gamechat/index.php?page_id=35&tagId='. $tag->term_id .'"><span class="tags"># '. $tag->name .'</span></a>';
+
+            $html .= "
+            <hr class='col-xs-12'>
+            </div>
+            <div class='col-xs-3 col-xs-offset-1'>
+                <div class='col-xs-12 upvotes'>
+                    <span>{$post->likes}</span>
+                    <i class='fa fa-thumbs-up' aria-hidden='true'></i>
+                </div>
+
+                <div class='col-xs-12 comments'>
+                    <span>{$post->comment_count}</span>
+                    <i class='fa fa-comments' aria-hidden='true'></i>
+                </div>
+            </div>
+        </article>
+    ";
+
+            return $html;
+}
